@@ -35,7 +35,7 @@ export function Fireflies() {
     if (!ctx) return;
 
     let animId: number;
-    let flies: Firefly[] = [];
+    const flies: Firefly[] = [];
 
     const resize = () => {
       canvas.width = window.innerWidth;

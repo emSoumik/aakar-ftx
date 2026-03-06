@@ -1,28 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Instrument+Serif:ital@0;1&family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
-  --font-display: "Instrument Sans", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-mono: "Geist Mono", monospace;
 }
 
 :root {
-  --color-cream: #F5F0E8;
-  --color-dark: #1C1612;
-  --color-dark-warm: #2A1F18;
-  --color-orange: #FF5F1F;
-  --color-peach: #FFB18F;
-  --color-gold: #FFE063;
-  --color-text-primary: #2A2118;
-  --color-text-secondary: #7A6E5F;
-  --color-text-muted: #8A7A6A;
-  --color-text-light: #F5F0E8;
-  --color-text-dim: #9E8E7E;
-  --color-card-bg: #FFFDF7;
+  --color-zinc-950: #09090b;
+  --color-zinc-900: #18181b;
+  --color-zinc-800: #27272a;
+  --color-accent: #10b981;
+  /* Emerald-500 as the single high-contrast accent */
+  --color-text-primary: #fcfcfc;
+  --color-text-secondary: #a1a1aa;
 }
 
 @layer base {
-  html, body, #root {
+
+  html,
+  body,
+  #root {
     height: 100%;
     margin: 0;
   }

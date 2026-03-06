@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 // Each cloud is a cluster of overlapping ellipses to create organic shapes
 const cloudClusters = [
@@ -34,41 +34,41 @@ export function StormOverlay() {
   const clusterRefs = useRef<(HTMLDivElement | null)[]>([]);
   const timeoutsRef = useRef<number[]>([]);
 
-  const flash = useCallback((index: number) => {
-    const el = clusterRefs.current[index];
-    if (!el) return;
-
-    el.style.opacity = String(0.6 + Math.random() * 0.4);
-
-    const doubleFlash = Math.random() < 0.35;
-
-    setTimeout(() => {
-      if (el) el.style.opacity = "0";
-
-      if (doubleFlash) {
-        setTimeout(() => {
-          if (el) el.style.opacity = String(0.4 + Math.random() * 0.3);
-          setTimeout(() => {
-            if (el) el.style.opacity = "0";
-          }, 80 + Math.random() * 60);
-        }, 100 + Math.random() * 80);
-      }
-    }, 60 + Math.random() * 80);
-
-    const next = 2000 + Math.random() * 5000;
-    timeoutsRef.current[index] = window.setTimeout(() => flash(index), next);
-  }, []);
-
   useEffect(() => {
+    const flash = (index: number) => {
+      const el = clusterRefs.current[index];
+      if (!el) return;
+
+      el.style.opacity = String(0.6 + Math.random() * 0.4);
+      const doubleFlash = Math.random() < 0.35;
+
+      setTimeout(() => {
+        if (el) el.style.opacity = "0";
+
+        if (doubleFlash) {
+          setTimeout(() => {
+            if (el) el.style.opacity = String(0.4 + Math.random() * 0.3);
+            setTimeout(() => {
+              if (el) el.style.opacity = "0";
+            }, 80 + Math.random() * 60);
+          }, 100 + Math.random() * 80);
+        }
+      }, 60 + Math.random() * 80);
+
+      const next = 2000 + Math.random() * 5000;
+      timeoutsRef.current[index] = window.setTimeout(() => flash(index), next);
+    };
+
     cloudClusters.forEach((_, i) => {
       const delay = 500 + Math.random() * 4000;
       timeoutsRef.current[i] = window.setTimeout(() => flash(i), delay);
     });
 
+    const activeTimeouts = timeoutsRef.current;
     return () => {
-      timeoutsRef.current.forEach((t) => clearTimeout(t));
+      activeTimeouts.forEach((t) => clearTimeout(t));
     };
-  }, [flash]);
+  }, []);
 
   return (
     <div className="fixed inset-0 z-[1] pointer-events-none">
