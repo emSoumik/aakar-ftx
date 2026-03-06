@@ -152,7 +152,7 @@ function App() {
         ) : (
           <img
             ref={imageRef}
-            src="/hero-bg.png"
+            src="/hero-bg.webp"
             alt="Hero Theme"
             className="w-full h-[120%] -top-[10%] left-0 absolute object-cover object-center opacity-80 will-change-transform transform-gpu"
           />
